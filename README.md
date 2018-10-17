@@ -58,12 +58,12 @@ Distributed under the Apache License, Version 2.0.
 <!-- Named page links below: /-->
 
 [logo]: https://avatars2.githubusercontent.com/u/32934967?s=200&v=4
-[travis]: https://travis-ci.org/cmr-exchange/cmr-service-bridge
-[travis-badge]: https://travis-ci.org/cmr-exchange/cmr-service-bridge.png?branch=master
+[travis]: https://travis-ci.org/cmr-exchange/cmr-service-bridge-docs
+[travis-badge]: https://travis-ci.org/cmr-exchange/cmr-service-bridge-docs.png?branch=master
 [deps-badge]: https://img.shields.io/badge/deps%20check-passing-brightgreen.svg
-[tag-badge]: https://img.shields.io/github/tag/cmr-exchange/cmr-service-bridge.svg
-[tag]: https://github.com/cmr-exchange/cmr-service-bridge/tags
+[tag-badge]: https://img.shields.io/github/tag/cmr-exchange/cmr-service-bridge-docs.svg
+[tag]: https://github.com/cmr-exchange/cmr-service-bridge-docs/tags
 [clojure-v]: https://img.shields.io/badge/clojure-1.9.0-blue.svg
-[clojars]: https://clojars.org/gov.nasa.earthdata/cmr-opendap
-[clojars-badge]: https://img.shields.io/clojars/v/gov.nasa.earthdata/cmr-opendap.svg
+[clojars]: https://clojars.org/gov.nasa.earthdata/cmr-service-bridge-docs
+[clojars-badge]: https://img.shields.io/clojars/v/gov.nasa.earthdata/cmr-service-bridge-docs.svg
 [security-scan-badge]: https://img.shields.io/badge/nvd%2Fsecurity%20scan-passing-brightgreen.svg

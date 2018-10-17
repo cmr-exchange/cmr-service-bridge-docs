@@ -1,6 +1,6 @@
-# cmr-service-bridge
+# cmr-service-bridge-docs
 
-*A CMR connector service that provides an inter-service API*
+*REST API and Source Code Documentation for CMR Service-Bridge*
 
 [![Build Status][travis-badge]][travis]
 [![Security Scan][security-scan-badge]][travis]
@@ -24,36 +24,28 @@
 
 ## About [&#x219F;](#contents)
 
-The Common Metadata Repository (CMR) is a high-performance, high-quality,
-continuously evolving metadata system that catalogs Earth Science data and
-associated service metadata records. These metadata records are registered,
-modified, discovered, and accessed through programmatic interfaces leveraging
-standard protocols and APIs.
-
-The set of APIs provided by CMR Service-Bridge allows client applications to
-integrate core CMR metadata more easily with other services like OPeNDAP,
-ECHO, ESI/EGI, etc.
-
+TBD
 
 ## Dependencies [&#x219F;](#contents)
 
 * Java
 * `lein`
+* `docker`
 
 
 ## Documentation [&#x219F;](#contents)
 
 Documentation for CMR Service-Bridge is availble
-[here](https://cmr.sit.earthdata.nasa.gov/opendap/docs). The content there
+[here](https://cmr.sit.earthdata.nasa.gov/service-bridge/docs). The content there
 is broken down by category; some of that is offered below as a convenience:
 
-* [Introduction](https://cmr.sit.earthdata.nasa.gov/opendap/docs/current/reference/0000-intro.html)
-* [Configuration](https://cmr.sit.earthdata.nasa.gov/opendap/docs/current/reference/0500-configuration.html)
-* [Running the Tests](https://cmr.sit.earthdata.nasa.gov/opendap/docs/current/reference/0750-tests.html)
-* [Quick Start](https://cmr.sit.earthdata.nasa.gov/opendap/docs/current/reference/1000-quick-start.html)
-* [REST API Usage](https://cmr.sit.earthdata.nasa.gov/opendap/docs/current/rest-api)
-* [Source Code API Reference](https://cmr.sit.earthdata.nasa.gov/opendap/docs/current/reference/index.html)
-* [Source Code Annotation](https://cmr.sit.earthdata.nasa.gov/opendap/docs/current/marginalia/index.html)
+* [Introduction](https://cmr.sit.earthdata.nasa.gov/service-bridge/docs/current/reference/0000-intro.html)
+* [Configuration](https://cmr.sit.earthdata.nasa.gov/service-bridge/docs/current/reference/0500-configuration.html)
+* [Running the Tests](https://cmr.sit.earthdata.nasa.gov/service-bridge/docs/current/reference/0750-tests.html)
+* [Quick Start](https://cmr.sit.earthdata.nasa.gov/service-bridge/docs/current/reference/1000-quick-start.html)
+* [REST API Usage](https://cmr.sit.earthdata.nasa.gov/service-bridge/docs/current/rest-api)
+* [Source Code API Reference](https://cmr.sit.earthdata.nasa.gov/service-bridge/docs/current/reference/index.html)
+* [Source Code Annotation](https://cmr.sit.earthdata.nasa.gov/service-bridge/docs/current/marginalia/index.html)
 
 
 ## License [&#x219F;](#contents)

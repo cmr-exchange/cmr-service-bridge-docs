@@ -1,6 +1,8 @@
-# CMR OPeNDAP Documentation
+# CMR Service-Bridge Documentation
 
-Documentation for the cmr-opendap project is published with the service
-deployment. For CMR SIT, this is located here:
+Documentation for the cmr-service-bridge project is published with the service
+deployment:
 
-* [http://cmr.sit.earthdata.nasa.gov/opendap/docs](http://cmr.sit.earthdata.nasa.gov/opendap/docs)
+* SIT [http://cmr.sit.earthdata.nasa.gov/service-bridge/docs](http://cmr.sit.earthdata.nasa.gov/service-bridge/docs)
+* UAT [http://cmr.uat.earthdata.nasa.gov/service-bridge/docs](http://cmr.uat.earthdata.nasa.gov/service-bridge/docs)
+* PROD [http://cmr.earthdata.nasa.gov/service-bridge/docs](http://cmr.earthdata.nasa.gov/service-bridge/docs)

@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>CMR OPeNDAP REST API Documentation</title>
+    <title>CMR Service-Bridge REST API Documentation</title>
 
     <style>
       .highlight table td { padding: 5px; }
@@ -302,6 +302,9 @@
                     <a href="#wcs-style-parameters" class="toc-h2 toc-link" data-title="wcs-style-parameters">WCS-Style Parameters</a>
                   </li>
                   <li>
+                    <a href="#size-estimate-resources" class="toc-h2 toc-link" data-title="size-estimate-resources">Size Estimate Resources</a>
+                  </li>
+                  <li>
                     <a href="#forthcoming" class="toc-h2 toc-link" data-title="forthcoming">Forthcoming</a>
                   </li>
               </ul>
@@ -330,10 +333,10 @@
                     <a href="#dependent-services" class="toc-h2 toc-link" data-title="dependent-services">Dependent Services</a>
                   </li>
                   <li>
-                    <a href="#cmr-opendap-warnings" class="toc-h2 toc-link" data-title="cmr-opendap-warnings">CMR OPeNDAP Warnings</a>
+                    <a href="#cmr-service-bridge-warnings" class="toc-h2 toc-link" data-title="cmr-service-bridge-warnings">CMR Service-Bridge Warnings</a>
                   </li>
                   <li>
-                    <a href="#cmr-opendap-errors" class="toc-h2 toc-link" data-title="cmr-opendap-errors">CMR OPeNDAP Errors</a>
+                    <a href="#cmr-service-bridge-errors" class="toc-h2 toc-link" data-title="cmr-service-bridge-errors">CMR Service-Bridge Errors</a>
                   </li>
               </ul>
           </li>
@@ -346,17 +349,24 @@
       <div class="dark-box"></div>
       <div class="content">
         <h1 id='rest-api-overview'>REST API Overview</h1>
-<p>The REST API for CMR OPeNDAP aims to accomplish a few core goals:</p>
+<p>The REST API for CMR Service-Bridge aims to accomplish a few core goals:</p>
 
 <ul>
-<li>Provide a straight forward means of bridging the CMR and OPeNDAP deployments</li>
-<li>Provide operational insights into the CMR OPeNDAP REST service itself</li>
+<li>Provide a straight forward means of bridging the CMR and other service deployments</li>
+<li>Provide operational insights into the CMR Service-Bridge REST service itself</li>
 <li>Do both of these as simply and in as scalable a manner as possible</li>
 </ul>
 
-<p>The REST API is currently focused on generating OPeNDAP data access URLs,
-allowing users to easily download subsetted files from OPeNDAP servers
-based on metadata stored in the CMR and presented to end users by EDSC.</p>
+<p>The REST API is currently focused on the following:
+* generating OPeNDAP data access URLs, and
+* providing size esimates for subsetted GIS data</p>
+
+<p>The first allows users to easily download subsetted files from OPeNDAP servers
+based on metadata stored in the CMR and presented to end users by EDSC.
+The second provides users with the ability to see what the total estimated size
+of their data request would be. This will give users the necessary feedback
+on whether the total of their subsetted data is too large, too small, or just
+right.</p>
 <h1 id='about-the-docs'>About the Docs</h1>
 <p>This API documentation provides prose in the central column, using
 the left collumn to highlight usage and code.</p>
@@ -381,7 +391,7 @@ breaks.</p>
   the concept ids that you know exist in your target environment.
 </aside>
 <h1 id='releases'>Releases</h1>
-<p>The following table provides a mapping between CMR OPeNDAP releases
+<p>The following table provides a mapping between CMR Service-Bridge releases
 and the API versions supported in each.</p>
 
 <table><thead>
@@ -392,9 +402,29 @@ and the API versions supported in each.</p>
 </tr>
 </thead><tbody>
 <tr>
-<td>1.1.0</td>
+<td>1.5.0</td>
 <td>v1, v2, v2.1</td>
 <td>In development</td>
+</tr>
+<tr>
+<td>1.4.0</td>
+<td>v1, v2, v2.1</td>
+<td>Released</td>
+</tr>
+<tr>
+<td>1.3.0</td>
+<td>v1, v2, v2.1</td>
+<td>Released</td>
+</tr>
+<tr>
+<td>1.2.0</td>
+<td>v1, v2, v2.1</td>
+<td>Released</td>
+</tr>
+<tr>
+<td>1.1.0</td>
+<td>v1, v2, v2.1</td>
+<td>Released</td>
 </tr>
 <tr>
 <td>1.0.0</td>
@@ -416,22 +446,22 @@ and the API versions supported in each.</p>
 <li>v1: First version of API (including admin resources)</li>
 </ul>
 <h1 id='versioned-api'>Versioned API</h1>
-<p>The CMR OPeNDAP REST API is versioned. By default, the most recent version of
+<p>The CMR Service-Bridge REST API is versioned. By default, the most recent version of
 the API is accessed when a request is submitted without specificing the
 desired version. Currently, this is <code>v2.1</code>.</p>
 
 <p>To request a specific version of the REST API, you must send an additional
-header in your request to CMR OPeNDAP.</p>
+header in your request to CMR Service-Bridge.</p>
 
 <blockquote>
 <p>An <code>Accept</code> header is required to request a specific version of the API:</p>
 </blockquote>
-<pre class="highlight plaintext"><code>"Accept: application/vnd.cmr-opendap.v2+json"
+<pre class="highlight plaintext"><code>"Accept: application/vnd.cmr-service-bridge.v2+json"
 </code></pre>
 <blockquote>
 <p>The following is also valid:</p>
 </blockquote>
-<pre class="highlight plaintext"><code>"Accept: application/vnd.cmr-opendap.v2"
+<pre class="highlight plaintext"><code>"Accept: application/vnd.cmr-service-bridge.v2"
 </code></pre>
 <p>All HTTP responses from the REST API also provide information on the version
 used when processing the request. This can be useful for clients debugging
@@ -446,13 +476,13 @@ calls to the service.</p>
 <blockquote>
 <p>The response headers will include the version used by the service:</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code>Cmr-Media-Type: cmr-opendap.v2; <span class="nv">format</span><span class="o">=</span>json
+<pre class="highlight shell tab-shell"><code>Cmr-Media-Type: cmr-service-bridge.v2; <span class="nv">format</span><span class="o">=</span>json
 </code></pre><pre class="highlight clojure"><code><span class="p">{</span><span class="n">...</span><span class="w">
- </span><span class="no">:cmr-media-type</span><span class="w"> </span><span class="s">"cmr-opendap.v2; format=json"</span><span class="w">
+ </span><span class="no">:cmr-media-type</span><span class="w"> </span><span class="s">"cmr-service-bridge.v2; format=json"</span><span class="w">
  </span><span class="n">...</span><span class="p">}</span><span class="w">
 </span></code></pre>
 <aside class="warning">
-  The most recent release of the CMR OPeNDAP API is always the default;
+  The most recent release of the CMR Service-Bridge API is always the default;
   if you experience unexpected issues and/or errors, this may be a result
   of using a new version of the API by default.
 </aside>
@@ -464,7 +494,7 @@ calls to the service.</p>
   intentional decision.
 </aside>
 <h1 id='authorized-access'>Authorized Access</h1>
-<p>CMR OPeNDAP requires the use of tokens in order to provide access to
+<p>CMR Service-Bridge requires the use of tokens in order to provide access to
 potentially protected collections, services, variables, and/or granules.</p>
 
 <blockquote>
@@ -484,7 +514,7 @@ a special header:</p>
 <p>Many of the examples in the documentation below show usage of the
 Echo token.</p>
 <h1 id='responses'>Responses</h1><h2 id='success'>Success</h2>
-<p>CMR OPeNDAP responses have pareticular formats, inherited from CMR response
+<p>CMR Service-Bridge responses have pareticular formats, inherited from CMR response
 data. A successful request will provide the results, the number of results
 and, the time taken to process the request.</p>
 
@@ -498,19 +528,19 @@ and, the time taken to process the request.</p>
   "warnings:" null
 }
 </code></pre><h2 id='errors'>Errors</h2>
-<p>When CMR OPeNDAP returns errors, it does so in a consistent format. In
+<p>When CMR Service-Bridge returns errors, it does so in a consistent format. In
 particular, the body of the HTTP response is a JSON string (or stream)
 representing an object with one key, <code>errors</code>, an associated value being
 an array of the errors encountered.</p>
 
 <blockquote>
-<p>CMR OPeNDAP error format</p>
+<p>CMR Service-Bridge error format</p>
 </blockquote>
 <pre class="highlight plaintext"><code>{
   "errors": [...]
 }
 </code></pre><h2 id='warnings'>Warnings</h2>
-<p>In either a success or error state, CMR OPeNDAP may also return a <code>warning</code>
+<p>In either a success or error state, CMR Service-Bridge may also return a <code>warning</code>
 key containing one or more messages. This is reserved for future use and
 will be the primary mechanism used to notify clients of coming changes in the
 API that will impact users of the default version.</p>
@@ -537,12 +567,12 @@ API that will impact users of the default version.</p>
   "errors": [...]
 }
 </code></pre><h1 id='ous-resources'>OUS Resources</h1>
-<p>This is the part of the REST API responsible for creating OPeNDAP-compatible
-query URLs (intended to be sent to a deployed OPeNDAP service). The name
+<p>This is the part of the REST API responsible for creating Service-Bridge-compatible
+query URLs (intended to be sent to a deployed Service-Bridge service). The name
 &quot;OUS&quot; (OPeNDAP URL Service) was used in the prototype for this service, and
 that name has carried through here.</p>
 <h2 id='collection-resources'>Collection Resources</h2>
-<p>The CMR OPeNDAP REST API supports two different means of creating a subsetted
+<p>The CMR Service-Bridge REST API supports two different means of creating a subsetted
 OPeNDAP URL for granules and/or variables in a collection: one returns a
 standard JSON document; the other, more effectial means returns a JSON
 document via HTTP streaming.</p>
@@ -550,8 +580,8 @@ document via HTTP streaming.</p>
 <p>The resources are as follows:</p>
 
 <ul>
-<li><code>GET /opendap/ous/collection/:concept-id</code></li>
-<li><code>GET /opendap/ous/streaming-collection/:concept-id</code></li>
+<li><code>GET /service-bridge/ous/collection/:concept-id</code></li>
+<li><code>GET /service-bridge/ous/streaming-collection/:concept-id</code></li>
 </ul>
 
 <blockquote>
@@ -577,7 +607,7 @@ document via HTTP streaming.</p>
   <span class="s2">"hits"</span>: 2,
   <span class="s2">"took"</span>: 0.621,
   <span class="s2">"items"</span>: <span class="o">[</span>
-    <span class="s2">"https://acdisc.gesdisc.eosdis.nasa.gov/opendap/Aqua_AIRS_Level3/AIRX3STD.006..."</span>
+    <span class="s2">"https://acdisc.gesdisc.eosdis.nasa.gov/service-bridge/Aqua_AIRS_Level3/AIRX3STD.006..."</span>
   <span class="o">]</span>
 <span class="o">}</span>
 </code></pre>
@@ -593,7 +623,7 @@ in its own context. However, common usage will involve more than on parameter
 acting at the same time. As such, here are some points to note:</p>
 
 <ul>
-<li>Currently CMR OPeNDAP supports only queries with one collection; as such,
+<li>Currently CMR Service-Bridge supports only queries with one collection; as such,
 the collection query to CMR Search explicitly limits the results to one
 with the <code>page_size=1</code> parameter.</li>
 <li>When multiple variable concept ids are passed, these are sent to CMR Search
@@ -626,7 +656,7 @@ below in separate sections.</p>
 them; you may use either, per your preference.</p>
 <h3 id='bounding-box'><code>bounding-box</code></h3>
 <p>This provides clients with the ability to select the spatial data to include
-in the granule data extracted by the OPeNDAP query to an area of interest.</p>
+in the granule data extracted by the Service-Bridge query to an area of interest.</p>
 
 <p>If not provided, the entire spatial extent of the granule will be used.</p>
 
@@ -885,46 +915,48 @@ for the time of interest.</p>
      <span class="s2">"%%OPENDAP_BASE_URL%%ous/collection/C1200187767-EDF_OPS?
      variables=V1200241812-EDF_OPS,V1200241817-EDF_OPS&amp;
      timeposition=2002-09-01T00:00:00Z,2016-07-03T00:00:00Z"</span>
-</code></pre><h2 id='forthcoming'>Forthcoming</h2>
+</code></pre><h2 id='size-estimate-resources'>Size Estimate Resources</h2>
+<p>TBD</p>
+<h2 id='forthcoming'>Forthcoming</h2>
 <p>The following are coming soon:</p>
 
 <ul>
-<li><code>POST /opendap/ous/collection/:concept-id</code></li>
-<li><code>POST /opendap/ous/collections</code></li>
+<li><code>POST /service-bridge/ous/collection/:concept-id</code></li>
+<li><code>POST /service-bridge/ous/collections</code></li>
 </ul>
 <h1 id='admin-resources'>Admin Resources</h1><h2 id='cache'>Cache</h2>
 <p>Administrative users may use a token to manage the authorization cache:</p>
 
 <ul>
-<li><code>GET    /opendap/cache/auth</code></li>
-<li><code>DELETE /opendap/cache/auth</code></li>
-<li><code>GET    /opendap/cache/auth/:item-key</code></li>
-<li><code>DELETE /opendap/cache/auth/:item-key</code></li>
+<li><code>GET    /service-bridge/cache/auth</code></li>
+<li><code>DELETE /service-bridge/cache/auth</code></li>
+<li><code>GET    /service-bridge/cache/auth/:item-key</code></li>
+<li><code>DELETE /service-bridge/cache/auth/:item-key</code></li>
 </ul>
 
 <p>Likewise, administrators have the ability to manage the concept cache:</p>
 
 <ul>
-<li><code>GET    /opendap/cache/concept</code></li>
-<li><code>DELETE /opendap/cache/concept</code></li>
-<li><code>GET    /opendap/cache/concept/:item-key</code></li>
-<li><code>DELETE /opendap/cache/concept/:item-key</code></li>
+<li><code>GET    /service-bridge/cache/concept</code></li>
+<li><code>DELETE /service-bridge/cache/concept</code></li>
+<li><code>GET    /service-bridge/cache/concept/:item-key</code></li>
+<li><code>DELETE /service-bridge/cache/concept/:item-key</code></li>
 </ul>
 <h2 id='health'>Health</h2>
 <p>Even though the <code>health</code> resources are classified as &quot;admin&quot;, they are
 available for use by anyone.</p>
 
 <ul>
-<li><code>GET     /opendap/health</code></li>
-<li><code>OPTIONS /opendap/health</code></li>
+<li><code>GET     /service-bridge/health</code></li>
+<li><code>OPTIONS /service-bridge/health</code></li>
 </ul>
 <h2 id='ping'>Ping</h2>
 <p>Administrative users may use a token to access the following:</p>
 
 <ul>
-<li><code>GET     /opendap/ping</code></li>
-<li><code>POST    /opendap/ping</code></li>
-<li><code>OPTIONS /opendap/ping</code></li>
+<li><code>GET     /service-bridge/ping</code></li>
+<li><code>POST    /service-bridge/ping</code></li>
+<li><code>OPTIONS /service-bridge/ping</code></li>
 </ul>
 <h1 id='testing-resources'>Testing Resources</h1>
 <p>The following resources are provided for use in various tests:</p>
@@ -938,10 +970,10 @@ available for use by anyone.</p>
 <li><code>GET /testing/503</code></li>
 </ul>
 <h1 id='errors-messages'>Errors Messages</h1><h2 id='dependent-services'>Dependent Services</h2>
-<p>CMR OPeNDAP will not only report its own errors, but errors encountered when
+<p>CMR Service-Bridge will not only report its own errors, but errors encountered when
 making calls to other services upon which it depends. Those errors are not
 listed below, but will be appended to the array of errors in the response body.</p>
-<h2 id='cmr-opendap-warnings'>CMR OPeNDAP Warnings</h2>
+<h2 id='cmr-service-bridge-warnings'>CMR Service-Bridge Warnings</h2>
 <p>Warning messages will generally be included in a successful reponse, and thus
 will usually have an HTTP status of 200.</p>
 <h3 id='gridded-data'>Gridded Data</h3>
@@ -960,7 +992,7 @@ will usually have an HTTP status of 200.</p>
 <td>The bounding information for the query has been removed.</td>
 </tr>
 </tbody></table>
-<h2 id='cmr-opendap-errors'>CMR OPeNDAP Errors</h2><h3 id='authorization'>Authorization</h3>
+<h2 id='cmr-service-bridge-errors'>CMR Service-Bridge Errors</h2><h3 id='authorization'>Authorization</h3>
 <table><thead>
 <tr>
 <th>HTTP Status</th>

@@ -1,0 +1,23 @@
+#!/bin/bash
+
+REPOS="cmr-service-bridge \
+       cmr-ous-plugin \
+       cmr-sizing-plugin \
+       cmr-http-kit \
+       cmr-exchange-geo \
+       cmr-metadata-proxy \
+       cmr-jar-plugin \
+       cmr-exchange-common \
+       cmr-mission-control \
+       cmr-process-manager \
+       cmr-exchange-query \
+       cmr-authz"
+
+mkdir -p ./repos/sources
+
+for REPO in $REPOS; do
+  git clone --depth=1 https://github.com/cmr-exchange/${REPO}.git ./repos/${REPO}
+  echo "Consolidating sources ..."
+  cp -r ./repos/${REPO}/src/* ./repos/sources
+done
+
